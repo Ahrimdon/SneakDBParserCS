@@ -3,3 +3,7 @@ beautifulsoup4>=4.9.3
 urllib3==1.26.5
 chardet==3.0.4
 charset_normalizer==2.0.0
+flask_peewee
+flask
+peewee
+pygments

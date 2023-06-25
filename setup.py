@@ -30,7 +30,7 @@ def install_requirements_in_venv():
     subprocess.check_call([os.path.join('venv', 'Scripts', 'pip'), 'install', '-r', 'requirements.txt'])
 
 if __name__ == "__main__":
-    create_venv_choice = input("Do you want to create a virtual environment and install the packages there? (y/N) ")
+    create_venv_choice = input("Do you want to create a virtual environment and install the packages there? (y/N) [Default: No] ")
     if create_venv_choice.lower() == 'y':
         print("Creating virtual environment...")
         create_venv()

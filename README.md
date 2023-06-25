@@ -34,11 +34,12 @@ Before you begin, ensure you have met the following requirements:
 
 ## Installation
 
-1.  * Download the latest release (.exe or .py)
+  
+1. * Download `.zip`
      <br>
      **OR**
      <br>
-    * Clone the repository using `git clone https://github.com/Ahrimdon/SneakDBParserCS.git`
+   * Clone the repository using `git clone https://github.com/Ahrimdon/SneakDBParserCS.git`
 
 2. Navigate to the directory using `cd SneakDBParserCS`
 
