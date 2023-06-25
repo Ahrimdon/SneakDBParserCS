@@ -1,0 +1,207 @@
+{% extends "base_table.html" %}
+
+{% block extra_head %}
+<style type="text/css">
+  pre {
+    clear: right;
+  }
+
+    {
+    % if not session.get('show') %
+  }
+
+  div#tableInfo {
+    display: none;
+  }
+
+    {
+    % endif %
+  }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+  $(function () {
+    var tableInfo = $('div#tableInfo');
+
+    $('a.sql-image').on('click', function (e) {
+      e.preventDefault();
+      var elem = $(this),
+        imgUrl = elem.attr('href'),
+        modalDiv = $('div#sql-image-modal');
+      modalDiv.find('h5.modal-title').text(elem.text());
+      modalDiv.find('.modal-body').empty().append(
+        $('<img src="' + imgUrl + '" />'));
+      modalDiv.modal({'keyboard': true});
+    });
+
+    $('a#toggleTableInfo').on('click', function (e) {
+      var show = !tableInfo.is(':visible');
+      e.preventDefault();
+      tableInfo.toggle('slide');
+      $.post('{{ url_for('set_table_definition_preference') }}', {'show': show}, function (resp) {
+        console.log('preference logged, new value: ' + resp.show);
+      });
+    });
+
+    $('a#toggleSqlCommand').on('click', function (e) {
+      var toggleSqlCommand = $('#sql-command-textarea');
+      var show = !toggleSqlCommand.is(':visible');
+      e.preventDefault();
+      toggleSqlCommand.toggle('slide');
+    });
+
+    $('a#displayHelp').on('click', function (e) {
+      var displayHelp = $('#help');
+      var show = !displayHelp.is(':visible');
+      e.preventDefault();
+      displayHelp.toggle('slide');
+    });
+
+    document.getElementById('sql-command-textarea').addEventListener('copy', function (e) {
+      var copiedText = window.getSelection().toString();
+      copiedText = copiedText.split('\n').map(line => line.trimStart()).join('\n');
+      e.clipboardData.setData('text/plain', copiedText);
+      e.preventDefault();
+    });
+
+    var recentQueries = JSON.parse(localStorage.getItem('recentQueries') || "[]");
+    {% if sql and not error %}
+    var sql = `{{ sql }}`;
+    var accum = [sql];
+    for (var i = 0; i < recentQueries.length; i++) {
+      if (recentQueries[i] !== sql) {accum.push(recentQueries[i])};
+    }
+    recentQueries = accum.slice(0, 20);
+    localStorage.setItem('recentQueries', JSON.stringify(recentQueries));
+    {% endif %}
+    var historyIndex = 0;
+    var sqlTextArea = $('textarea#sql');
+
+    sqlTextArea.on('keydown', function (e) {
+      if (e.shiftKey) {
+        if (e.keyCode == 38) { // up.
+          historyIndex += 1;
+          if (historyIndex >= recentQueries.length) {historyIndex = 0;}
+          sqlTextArea.html(recentQueries[historyIndex]);
+          e.preventDefault();
+        } else if (e.keyCode == 40) { // down.
+          historyIndex -= 1;
+          if (historyIndex < 0) {historyIndex = recentQueries.length - 1;}
+          sqlTextArea.html(recentQueries[historyIndex]);
+          e.preventDefault();
+        }
+      }
+    });
+    sqlTextArea.focus();
+  });
+</script>
+{% endblock %}
+
+{% block query_tab_class %} active{% endblock %}
+
+{% block inner_content %}
+<h3>
+  <p class="float-right">
+    <a class="btn btn-primary btn-xs" href="#" id="toggleTableInfo">+/- Table Definition</a>
+  </p>
+  <p class="float-center">
+    <a class="btn btn-primary btn-xs" href="#" id="toggleSqlCommand">+/- Search Queries</a>
+  </p>
+  <pre id="sql-command-textarea" class="embedded-code" style="display: none; color: red; font-size: 14px;">
+    > <b>Search for Exact Phrases</b>
+    SELECT *
+    FROM "Table"
+    WHERE LOWER("Header") = LOWER('Value')
+    ORDER BY "Header" DESC
+
+    > <b>Search for Similar Phrases</b> 
+    SELECT *
+    FROM "Table"
+    WHERE "Column" LIKE '%Value%'
+    ORDER BY "Column" DESC
+  </pre>
+  Query
+</h3>
+<div id="tableInfo">
+  {{ table_sql|format_create_table|highlight }}
+</div>
+<form action="." method="post" role="form">
+  <div class="form-group{% if error %} has-error has-feedback{% endif %}">
+    <textarea class="form-control{% if error %} is-invalid{% endif %}" id="sql" name="sql"
+      style="height: 120px;">{% if sql %}{{ sql }}{% endif %}</textarea>
+    <small class="form-text text-muted">Use Shift + Up/Down to navigate recently-executed queries</small>
+    {% if error %}
+    <div class="invalid-feedback">{{ error }}</div>
+    {% endif %}
+  </div>
+  <button class="btn btn-primary" type="submit">Execute</button>
+  <button class="btn btn-secondary" name="export_json" type="submit">Export JSON</button>
+  <button class="btn btn-secondary" name="export_csv" type="submit">Export CSV</button>
+  <div class="btn-group">
+    <div class="dropdown">
+      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" id="dropdownMenuButton"
+        aria-haspopup="true" aria-expanded="false">SQL Help</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% for parts, img_url in query_images %}
+        <a class="dropdown-item sql-image" href="{{ url_for('static', filename=img_url) }}">{{ ' : '.join(parts) }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+<hr />
+
+{% if row_count is not none and row_count >= 0 %}
+<p>Rows modified: <code>{{ row_count }}</code></p>
+{% endif %}
+
+{% if data_description %}
+{% if not data %}
+<p>Empty result set.</p>
+{% else %}
+<a class="float-right" href="{{ url_for('table_query', table=table, sql=sql) }}">Permalink</a>
+<h3>
+  Results ({{ data|length }})
+</h3>
+<table class="table table-striped small">
+  <thead>
+    <tr>
+      {% for col_desc in data_description %}
+      <th>{{ col_desc[0] }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+    <tr>
+      {% for value in row %}
+      <td>
+        {% if value is none %}<code>NULL</code>{% else %}{{ value|value_filter|safe }}{% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endif %}
+<div class="modal fade" id="sql-image-modal" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
