@@ -4,11 +4,13 @@
 
 ## Table of Contents
 
-- [SneakDBParserCS](#SneakDBParserCS)
+- [SneakDBParserCS](#sneakdbparsercs)
+  - [Table of Contents](#table-of-contents)
   - [Introduction](#introduction)
   - [Features](#features)
+  - [Supported Gamemodes](#supported-gamemodes)
   - [Prerequisites](#prerequisites)
-  - [Installation](#Installation)
+  - [Installation](#installation)
   - [Instructions](#instructions)
   - [License](#license)
 
