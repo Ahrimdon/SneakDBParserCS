@@ -17,25 +17,21 @@ def check_or_create_directories():
     if not os.path.exists('sqlite_web_viewer/database'):
         os.makedirs('sqlite_web_viewer/database')
 
+# Fetch the webpage
+url = "https://snksrv.com/surfstats/?view=maps"
+response = requests.get(url)
+
+# Parse it with BeautifulSoup
+soup = BeautifulSoup(response.content, 'html.parser')
+
 # Check if MapDB.html exists
-if os.path.isfile('temp/MapDB.html'):
-    # Open the HTML file and parse it with BeautifulSoup
-    with open("temp/MapDB.html", 'r', encoding='utf-8') as f:
-        soup = BeautifulSoup(f, 'html.parser')
+if not os.path.isfile('temp/MapDB.html'):
+    # Save the webpage as MapDB.html
+    with open('temp/MapDB.html', 'w', encoding='utf-8') as f:
+        f.write(response.text)
 
-        # Fetch the webpage
-        url = "https://snksrv.com/surfstats/?view=maps"
-        response = requests.get(url)
-
-        # Save the webpage as MapDB.html
-        with open('temp/MapDB.html', 'w', encoding='utf-8') as f:
-            f.write(response.text)
-
-        # Call the check_or_create_directories function
-        check_or_create_directories()
-
-        # Parse it with BeautifulSoup
-        soup = BeautifulSoup(response.content, 'html.parser')
+# Call the check_or_create_directories function
+check_or_create_directories()
 
 # Find the tables in the HTML
 table = soup.find('table', class_="table table-striped table-hover sortable")

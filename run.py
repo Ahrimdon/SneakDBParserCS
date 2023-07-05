@@ -14,10 +14,6 @@ def check_or_create_directories():
     if not os.path.exists('export'):
         os.makedirs('export')
 
-    # Check if the 'sqlite_web_viewer/database' directory exists. If not, create it.
-    if not os.path.exists('sqlite_web_viewer/database'):
-        os.makedirs('sqlite_web_viewer/database')
-
 # Check if surf_db.html exists
 if os.path.isfile('temp/surf_db.html'):
     # Ask the user if they want to use the existing file
