@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set DATABASE="sqlite_web_viewer/database/surf_db.db"
+set DATABASE="export/surf_db.db"
 set HOST=0.0.0.0
 set PORT=7890
 set ROWS_PER_PAGE=500

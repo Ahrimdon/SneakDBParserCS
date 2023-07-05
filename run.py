@@ -3,7 +3,7 @@ import csv
 import sqlite3
 import requests
 import os
-import shutil
+# import shutil
 
 # Check if the 'temp' directory exists. If not, create it. We want this created before everything else.
 if not os.path.exists('temp'):
@@ -156,7 +156,7 @@ if output_format in ['2', '3']:
     conn.commit()
     # Close the SQLite connection
     conn.close()
-    shutil.copy2('export/surf_db.db', 'sqlite_web_viewer/database/surf_db.db')
+#   shutil.copy2('export/surf_db.db', 'sqlite_web_viewer/database/surf_db.db') # Not needed with new batch format
 
 # Close the CSV files
 for f, writer in csv_writers.values():
