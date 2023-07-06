@@ -92,13 +92,13 @@ if output_format in ['2', '3']:
 
     # Create tables in the SQLite database
     c.execute('''CREATE TABLE MapRecords
-                 (MapName text, Rank integer, BestTime text, Date text, StartSpeed text)''')
+                 (MapName TEXT, Rank INTEGER, BestTime TEXT, Date TEXT, StartSpeed TEXT)''')
 
     c.execute('''CREATE TABLE MapTimes
-                 (MapName text, Rank integer, PersonalBest text, Date text, StartSpeed text)''')
+                 (MapName TEXT, Rank INTEGER, PersonalBest TEXT, Date TEXT, StartSpeed TEXT)''')
 
     c.execute('''CREATE TABLE BonusTimes
-                 (MapName text, PersonalBest text, Rank integer, Bonus integer, Date text, StartSpeed text)''')
+                 (MapName TEXT, PersonalBest TEXT, Rank INTEGER, Bonus INTEGER, Date TEXT, StartSpeed TEXT)''')
 
 csv_writers = {}
 

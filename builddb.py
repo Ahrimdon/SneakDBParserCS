@@ -13,10 +13,6 @@ def check_or_create_directories():
     if not os.path.exists('export'):
         os.makedirs('export')
 
-    # Check if the 'sqlite_web_viewer/database' directory exists. If not, create it.
-    if not os.path.exists('sqlite_web_viewer/database'):
-        os.makedirs('sqlite_web_viewer/database')
-
 # Fetch the webpage
 url = "https://snksrv.com/surfstats/?view=maps"
 response = requests.get(url)
@@ -45,8 +41,8 @@ c.execute('''DROP TABLE IF EXISTS Records;''')
 
 # Create tables in the SQLite database
 c.execute('''CREATE TABLE Records
-                (MapName text, MapTier text, WRTime text, WRHolder text,
-                Completions text, AverageTime text, Bonuses text)''')
+                (MapName TEXT, MapTier INTEGER, WRTime INTEGER, WRHolder TEXT,
+                Completions INTEGER, AverageTime INTEGER, Bonuses TEXT)''')
 
 # Write to the SQLite database
 for row in table.findAll('tr'):
