@@ -4,18 +4,17 @@
 
 ## Table of Contents
 
-- [SneakDBParserCS](#sneakdbparsercs)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Supported Gamemodes](#supported-gamemodes)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Instructions](#instructions)
-  - [License](#license)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Supported Gamemodes](#supported-gamemodes)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Instructions](#instructions)
+- [Credits](#credits)
+- [License](#license)
 
 ## Introduction
-SneakDBParserCS is a highly-efficient Python script that enables you to organize and manage your Counter-Strike surf times. This tool lets you extract your database information from Sneak's Counter-Strike Database conveniently via an HTML file. It offers two distinct methods for exporting your data, as *Comma Separated Values (**.csv**)* files, and as a *SQLite Database (**.db**)*. With SneakDBParserCS, viewing and analyzing your surf times has never been easier!
+SneakDBParserCS is a highly-efficient Python script designed to help you organize and manage your Counter-Strike surf times. This tool lets you extract your database information from Sneak's Counter-Strike Database conveniently via an HTML file. It offers two distinct methods for exporting your data, as *Comma Separated Values (**.csv**)* files, and as a *SQLite Database (**.db**)*. With SneakDBParserCS, viewing and analyzing your surf times has never been easier!
 
 ## Features
 - **Web Scraping**: The script uses BeautifulSoup to scrape the parse data from the user's Sneak's Counter-Strike Database profile.
@@ -32,8 +31,6 @@ Before you begin, ensure you have met the following requirements:
   * When installing, check-marking the box `ADD TO PATH` is recommended.
 
 ## Installation
-
-  
 1. * Download `.zip`
      <br>
      **OR**
@@ -63,6 +60,9 @@ Follow the steps below to use the SneakDBParserCS:
 4. **Step 5:** Your DB entries will then be saved in a folder named `export`.
 
 5. **Step 6 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
+
+## Credits
+A big thank you to my main tester **PandaMane** for their constant feedback and assistance in testing this tool!
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
