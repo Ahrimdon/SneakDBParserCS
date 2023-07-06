@@ -42,7 +42,7 @@ c.execute('''DROP TABLE IF EXISTS Records;''')
 # Create tables in the SQLite database
 c.execute('''CREATE TABLE Records
                 (MapName TEXT, MapTier INTEGER, WRTime INTEGER, WRHolder TEXT,
-                Completions INTEGER, AverageTime INTEGER, Bonuses TEXT)''')
+                Completions INTEGER, AverageTime INTEGER, Bonuses INTEGER)''')
 
 # Write to the SQLite database
 for row in table.findAll('tr'):
