@@ -62,7 +62,9 @@ Follow the steps below to use the SneakDBParserCS:
 5. **Step 6 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
 
 ## Credits
-A big thank you to my main tester **PandaMane** for their constant feedback and assistance in testing this tool!
+- Creator - **Ahrimdon**
+
+- Main Tester - **PandaMane**
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
