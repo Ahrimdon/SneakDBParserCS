@@ -48,21 +48,21 @@ Follow the steps below to use the SneakDBParserCS:
 #### **Using the Python Script**
 1. **Step 1:** Navigate to the repository using `cd SneakDBParserCS`.
 
-2. **Step 2:** Run `builddb.py` to build the initial database.
+2. **Step 2:**  Run `main.py`, select `1` and enter your SteamID (e.g. STEAM_1:1:66072178).
+   
+  > ***Note:*** If you already have a `surf_db.html` it will first ask if you wish to use it or overwrite it.
 
-> ***Note:*** It is only necessary to run `builddb.py` during first installation, and when updating the database.
+3. **Step 3:** Choose what you wish to save your Database entries as `(.csv, .db, both)`.
 
-3. **Step 3:** Execute `main.py` and enter the URL to your profile for SneakSrvDB (e.g. https://snksrv.com/surfstats/?view=profile&id=YOURSTEAMID).
+4. **Step 4:** Run `main.py` and select `2` to build the initial database.
 
-4. **Step 4:** Choose what you wish to save your Database entries as `(.csv, .db, both)`.
+  > ***Note:*** It is only necessary to build the initial database *once* during first installation, or when updating the database.
 
-> ***Note:*** If you already have a `surf_db.html` it will first ask if you wish to use it or overwrite it.
+5. **Step 5:** Your DB entries will then be saved in a folder named `export`.
 
-4. **Step 5:** Your DB entries will then be saved in a folder named `export`.
+6. **Step 6:** Run `main.py` and select `3` to parse the all of the general entries into your own. 
 
-5. **Step 6:** Run `parse.py` to parse the all of the general entries into your own. 
-
-5. **Step 7 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
+7. **Step 7 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
 
 ## Example
 ![image](assets/Example.png)
