@@ -59,7 +59,13 @@ Follow the steps below to use the SneakDBParserCS:
 
 4. **Step 5:** Your DB entries will then be saved in a folder named `export`.
 
-5. **Step 6 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
+5. **Step 6:** Run `parse.py` to parse the all of the general entries into your own. 
+
+5. **Step 7 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
+
+## Example
+
+![image](assets/Example.png)
 
 ## Credits
 - Creator - **Ahrimdon**
