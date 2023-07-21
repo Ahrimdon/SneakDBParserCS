@@ -272,11 +272,6 @@ def build_database():
     conn.commit()
     conn.close()
 
-    # Ask user if they want to export data to CSV files
-    output_to_csv = input("Do you want to export data to CSV files? (y/N) ")
-    if output_to_csv.lower() == 'y':
-        # Add the code to export data to CSV files
-
 def parse():
     # Create a SQLite connection to 'export/surf_db.db'
     conn = sqlite3.connect('export/surf_db.db')
