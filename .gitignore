@@ -1,0 +1,8 @@
+__pycache__
+uninstall.*
+venv.*
+/bin/temp
+/bin/export
+/temp
+/export
+/venv

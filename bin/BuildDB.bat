@@ -1,6 +1,6 @@
 @echo off
 
-set STEAM_ID="STEAM_1:1:66072178"
+set STEAM_ID="STEAM_ID_HERE"
 
 echo.
 echo ----------------------------------------------
