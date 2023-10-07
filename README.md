@@ -4,46 +4,69 @@
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Supported Gamemodes](#supported-gamemodes)
-- [Prerequisites](#prerequisites)
+- [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Supported Gamemodes](#supported-gamemodes)
+  - [Prerequisites](#prerequisites)
 - [Installation](#installation)
+- [Finding Your SteamID](#finding-your-steamid)
 - [Instructions](#instructions)
-- [Example](#example)
+    - [**Command Line Arguments**](#command-line-arguments)
+    - [**Using the Python Script**](#using-the-python-script)
+  - [Example](#example)
 - [Credits](#credits)
 - [License](#license)
 
-## Introduction
+### Introduction
+-----
 SneakDBParserCS is a highly-efficient Python script designed to help you organize and manage your Counter-Strike surf times. This tool lets you extract your database information from Sneak's Counter-Strike Database conveniently via an HTML file. It offers two distinct methods for exporting your data, as *Comma Separated Values (**.csv**)* files, and as a *SQLite Database (**.db**)*. With SneakDBParserCS, viewing and analyzing your surf times has never been easier!
 
-## Features
+### Features
+-----
 - **Web Scraping**: The script uses BeautifulSoup to scrape the parse data from the user's Sneak's Counter-Strike Database profile.
 - **Data Parsing**: It accurately parses the scraped data into usable information such as Map Records, Map Times, Map Tier, and Bonus Times, and more!
 - **Dynamic Data Export**: The script provides an option to export the parsed data into various formats such as CSV and SQLite Database, or both. 
 - **Local Webfront**: Allows the user to locally host a WebGUI to display, modify and query their database!
 
-## Supported Gamemodes
+### Supported Gamemodes
+-----
 - **CS:GO Surf**
 
-## Prerequisites
+### Prerequisites
+-----
 Before you begin, ensure you have met the following requirements:
-* You have a `Windows` machine running [Python 3.5](https://www.python.org/downloads/) or later.
+* You have a `Windows` machine running [Python 3.9](https://www.python.org/downloads/) or later.
   * When installing, check-marking the box `ADD TO PATH` is recommended.
 
+* If you are on `Windows` and do not have Python installed, you can use the provided executable - `SneakDBParser.exe`
+
 ## Installation
-1. * Download `.zip`
-     <br>
-     **OR**
-     <br>
-   * Clone the repository using `git clone https://github.com/Ahrimdon/SneakDBParserCS.git`.
+- Download the ZIP archive or clone the repository `git clone https://github.com/Ahrimdon/SneakDBParserCS.git && cd SneakDBParserCS`
+- Run the setup using the command `setup.py`.
 
-2. Navigate to the directory using `cd SneakDBParserCS`.
-
-3. Run the setup using the command `setup.py`.
+## Finding Your SteamID
+1. Make sure your Steam profile is set to public
+2. Right-click on profile --> `Copy Page URL`
+3. Enter the URL into the [SteamID Finder](https://steamid.io/lookup/76561198092410085) (e.g. `STEAM_1:1:66072178`)
 
 ## Instructions
-Follow the steps below to use the SneakDBParserCS:
+
+#### **Command Line Arguments**
+```
+  -h, --help           show this help message and exit
+  --steam_id STEAM_ID  The Steam ID to be used
+  --update             Update the surf profile
+  --build              Build or update the database
+  --parse              Parse the database
+  --complete           Run --update, --build, and --parse consecutively
+```
+
+> For example, to build the the complete database with you surf statistics you can use `./SneakDBParser.exe --steam_id STEAM_1:1:66072178 --complete`
+
+**This will pull your surf stats, build the database, and parse the results.**
+
+-----
 
 #### **Using the Python Script**
 1. **Step 1:** Navigate to the repository using `cd SneakDBParserCS`.
@@ -64,7 +87,9 @@ Follow the steps below to use the SneakDBParserCS:
 
 7. **Step 7 (Optional):** To view, query, and sort your database with ease, run the batch file `StartWebfront.bat`. To see your database, visit `http://127.0.0.1:7890/` or `http://localhost:7890/`. From here you can view, sort, query entries and ***much*** more!.
 
-## Example
+<u>**All actions above work with double-clicking the provided executable**</u>
+### Example
+-----
 ![image](assets/Example.png)
 
 ## Credits

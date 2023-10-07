@@ -4,7 +4,20 @@ import sqlite3
 import requests
 import os
 import time
+import sys
+import argparse
 # import shutil
+
+def get_args():
+    parser = argparse.ArgumentParser(description="Surf DB Script")
+    parser.add_argument('--steam_id', type=str, help="The Steam ID to be used", default="")
+    parser.add_argument('--update', action='store_true', help="Update the surf profile")
+    parser.add_argument('--build', action='store_true', help="Build or update the database")
+    parser.add_argument('--parse', action='store_true', help="Parse the database")
+    parser.add_argument('--complete', action='store_true', help="Run --update, --build, and --parse consecutively")
+    return parser.parse_args()
+
+args = get_args()
 
 def prompt_user_choice():
     print("Select an option:")
@@ -34,7 +47,10 @@ def update_surf_profile():
                 soup = BeautifulSoup(f, 'html.parser')
         else:
             # Prompt the user for their Steam ID
-            steam_id = input("Please enter your Steam ID: ")
+            if args.steam_id:
+                steam_id = args.steam_id
+            else:
+                steam_id = input("Please enter your Steam ID: ")
 
             # Build the URL
             url = f"https://snksrv.com/surfstats/?view=profile&id={steam_id}"
@@ -53,7 +69,10 @@ def update_surf_profile():
             soup = BeautifulSoup(response.content, 'html.parser')
     else:
         # Prompt the user for their Steam ID
-        steam_id = input("Please enter your Steam ID: ")
+        if args.steam_id:
+            steam_id = args.steam_id
+        else:
+            steam_id = input("Please enter your Steam ID: ")
 
         # Build the URL
         url = f"https://snksrv.com/surfstats/?view=profile&id={steam_id}"
@@ -175,9 +194,14 @@ def update_surf_profile():
         f.close()
 
     # Extract general stats
-    general_stats = soup.find('h2').text.strip() + "\n"
-    general_stats += soup.find('h2').next_sibling.strip() + "\n"
-    general_stats += soup.find('b').text.strip() + "\n\n"
+    try:
+        general_stats = soup.find('h2').text.strip() + "\n"
+        general_stats += soup.find('h2').next_sibling.strip() + "\n"
+        general_stats += soup.find('b').text.strip() + "\n\n"
+    except AttributeError:
+        print("SteamID not found.")
+        sys.exit(1)
+        # return
 
     stat_table = soup.find('table', class_="table table-striped table-hover")
     rows = stat_table.find_all('tr')
@@ -325,15 +349,26 @@ def parse():
     conn.close()
 
 def main():
-    user_choice = prompt_user_choice()
-    if user_choice == '1':
+    if args.update:
         update_surf_profile()
-    elif user_choice == '2':
+    if args.build:
         build_database()
-    elif user_choice == '3':
+    if args.parse:
         parse()
-    else:
-        print("Invalid input! Please enter either '1', '2' or '3")
+    if args.complete:
+        update_surf_profile()
+        build_database()
+        parse()
+    elif not any((args.update, args.build, args.parse, args.complete)):
+        user_choice = prompt_user_choice()
+        if user_choice == '1':
+            update_surf_profile()
+        elif user_choice == '2':
+            build_database()
+        elif user_choice == '3':
+            parse()
+        else:
+            print("Invalid input! Please enter either '1', '2', or '3'")
 
 if __name__ == "__main__":
     main()
