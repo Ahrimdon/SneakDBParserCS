@@ -74,11 +74,9 @@ Before you begin, ensure you have met the following requirements:
 
 -----
 
-> To build the the complete database using *PowerShell* with you surf statistics you can use `./SneakDBParser.exe --steam_id STEAM_1:1:66072178 --complete`
-
-> To build the the complete database using *Windows Command Prompt* with you surf statistics you can use `SneakDBParser.exe --steam_id STEAM_1:1:66072178 --complete`
-
-> To build the the complete database using *Python*, you can use `python main.py --steam_id STEAM_1:1:66072178 --complete`
+* To build the the complete database using *PowerShell*, you can use `./SneakDBParser.exe --steam_id STEAM_1:1:66072178 --complete`
+* To build the the complete database using *Windows Command Prompt*, you can use `SneakDBParser.exe --steam_id STEAM_1:1:66072178 --complete`
+* To build the the complete database using *Python*, you can use `python main.py --steam_id STEAM_1:1:66072178 --complete`
 
 **This will pull your surf stats, build the database, and parse the results.**
 
