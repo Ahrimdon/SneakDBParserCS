@@ -48,11 +48,11 @@ Before you begin, ensure you have met the following requirements:
 - Edit the file `BuildDB.bat` to add your SteamID (See [Finding Your SteamID](#finding-your-steamid))
 - Run `BuildDB.bat`, select your option and wait for it to finish
 - Run `StartWebfront.bat` to initialize the SQLite Webfront
-- Open you browser and go to `http://localhost:7890` or `http://127.0.0.1:7890` to view you locally hosted surf database!
+- Open you browser and go to `http://localhost:7890` or `http://127.0.0.1:7890` to view your locally hosted surf database!
 
 #### Downloading the Repository
 - Download the ZIP archive or clone the repository `git clone https://github.com/Ahrimdon/SneakDBParserCS.git && cd SneakDBParserCS`
-- Run the setup using the command `setup.py`.
+- Run the setup using the command `python setup.py`.
 
 ## Finding Your SteamID
 1. Make sure your Steam profile is set to public
