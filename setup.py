@@ -26,14 +26,19 @@ def create_uninstall_scripts():
 def install_requirements():
     subprocess.check_call(["python", '-m', 'pip', 'install', '-r', 'requirements.txt'])
 
+def upgrade_pip():
+    subprocess.check_call([os.path.join('venv', 'Scripts', 'python'), '-m', 'pip', 'install', '--upgrade', 'pip'])
+
 def install_requirements_in_venv():
     subprocess.check_call([os.path.join('venv', 'Scripts', 'pip'), 'install', '-r', 'requirements.txt'])
 
 if __name__ == "__main__":
-    create_venv_choice = input("Do you want to create a virtual environment and install the packages there? (y/N) [Default: No] ")
+    create_venv_choice = input("Do you want to create a virtual environment and install the packages there? (y/N) [Default: Yes] ")
     if create_venv_choice.lower() == 'y':
         print("Creating virtual environment...")
         create_venv()
+        print("Upgrading pip...")
+        upgrade_pip()
         print("Installing packages in the virtual environment...")
         install_requirements_in_venv()
         print("Creating uninstall scripts...")
