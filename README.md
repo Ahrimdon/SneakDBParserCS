@@ -42,6 +42,15 @@ Before you begin, ensure you have met the following requirements:
 * If you are on `Windows` and do not have Python installed, you can use the provided executable - `SneakDBParser.exe`
 
 ## Installation
+#### Using the Latest Release **(EASIEST)**
+- Navigate to the latest release and download `SneakDBParserCS.zip`
+- Extract the ZIP archive
+- Edit the file `BuildDB.bat` to add your SteamID (See [Finding Your SteamID](#finding-your-steamid))
+- Run `BuildDB.bat`, select your option and wait for it to finish
+- Run `StartWebfront.bat` to initialize the SQLite Webfront
+- Open you browser and go to `http://localhost:7890` or `http://127.0.0.1:7890` to view you locally hosted surf database!
+
+#### Downloading the Repository
 - Download the ZIP archive or clone the repository `git clone https://github.com/Ahrimdon/SneakDBParserCS.git && cd SneakDBParserCS`
 - Run the setup using the command `setup.py`.
 
